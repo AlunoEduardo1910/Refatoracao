@@ -1,18 +1,25 @@
+from models import cliente, pedidos
 from models.cliente import Cliente
 from models.pedidos import Pedido
 import json
 
-
-pedidos = []
-
+CLIENTES = []
+MENU = {"Pizza Salgada" : 50, "Pizza Doce" : 30, "Refri" : 7, "Água" : 5}
+PEDIDOS_ITENS = []
+PEDIDOS = {}
+OBSERVAÇÃO = {}
 
 
 def novo_cliente(nome, email, vip=False): #retirado a data como parâmetro, tendo em vista que ela é gerada automaticamente dentro da classe
-        return Cliente(nome, email, vip)
+    cliente = Cliente(nome, email, vip)
+    return f"Nome do Cliente: {cliente.nome}\n" \
+           f"Email do Cliente: {cliente.email}\n" \
+           f"VIP: {cliente.vip}"
 
-def criar_pedido(c: Cliente, itens):
-    pedido = Pedido(c, itens)
-    pedidos.append(pedido)
+
+def criar_pedido(email, itens):
+    pedido = Pedido(email, itens)
+    PEDIDOS.append(pedido)
     return pedido
 #alterado p para pedido, para melhor identificação
 #O cliente após o c: estava com o c minúsculo, alterado para maiúsculo, visto que queremos puxar a classe.

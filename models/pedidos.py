@@ -1,13 +1,13 @@
 
 
-STATUS_PERMITIDOS = {1 : "Novo", 2 : "em  andamento",3 : "concluido",4 : "cancelado"}
+STATUS_PERMITIDOS = {1 : "Novo", 2 : "em  andamento",3 : "concluido", 4 : "cancelado"}
 
 class Pedido:
-    ultimo_id = 0
+    id = 0
 
     def __init__(self,cliente,itens,total):
-        Pedido.ultimo_id += 1
-        self.id = str(Pedido.ultimo_id)
+        Pedido.id += 1
+        self.id = str(Pedido.id)
         self.cliente = cliente
         self.itens = itens
         self.total = total

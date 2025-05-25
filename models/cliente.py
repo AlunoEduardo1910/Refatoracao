@@ -1,17 +1,23 @@
 from datetime import datetime
 
 class Cliente:
+    _id_counter = 0  # Atributo de classe para gerar IDs únicos automaticamente
+
     def __init__(self, nome, email, vip=False):
+        # MELHORIA: ID agora é atribuído automaticamente ao cliente
+        Cliente._id_counter += 1
+        self.id = Cliente._id_counter
+
         self.nome = nome
         self.email = email
-        self.vip = vip
-        self.data_do_cadastro = datetime.now().strftime("%d/%m/%Y")
+        self.vip = vip  # Booleano para indicar se é cliente VIP
+        self.data_do_cadastro = datetime.now().strftime("%d/%m/%Y")  # Data atual formatada
 
     def mostrar_dados(self):
+        # Retorna uma string formatada com nome e tipo do cliente
         return f"{self.nome} ({'VIP' if self.vip else 'Comum'})"
 
-# A classe pedido deve ser separada em outro arquivo.
-# Os arquivos devem estar dentro do diretório models
-# a classe cliente está sem comportamento, adicionado o comportamento mostrar dados para o cliente, para verificar se ele é vip ou não.
-# Nome dos atributos mais claros
-#retirado a função de cadastrar clientes do cliente
+# MELHORIA GERAL:
+# - O ID do cliente agora é único e automático.
+# - Adicionado o atributo data_do_cadastro para registrar o momento do cadastro.
+# - Método mostrar_dados melhora a legibilidade do status VIP do cliente.

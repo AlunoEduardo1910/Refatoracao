@@ -1,5 +1,6 @@
-from app.logica_sistema import novo_cliente, criar_pedido, MENU, PEDIDOS, PEDIDOS_ITENS
+from app.logica_sistema import novo_cliente, criar_pedido, MENU, PEDIDOS, PEDIDOS_ITENS, listar_pedidos_json
 from models.cliente import Cliente
+from models.pedidos import Pedido
 
 #nome das variaveis estão muito simples, dificultando a identificação da função como um todo.
 #Criado um dicionário global com os itens disponíveis no cardápio ao invés de um prompt já pré feito com apenas 2 combinações de itens
@@ -22,6 +23,7 @@ while comando != "6":
             vip = input("É VIP? (s/n): ")
 
             print(novo_cliente(nome, email, vip))
+
         case "2":
             print(MENU)
             while True:
@@ -31,7 +33,8 @@ while comando != "6":
                 if itens in MENU:
                     PEDIDOS_ITENS.append(itens)
                 elif itens == "Sair":
-
+                    PEDIDOS[Pedido.id]=PEDIDOS_ITENS.copy()
+                    print(PEDIDOS)
                     break
                 else:
                     print("Item não cadastrado no menu")

@@ -1,17 +1,18 @@
 
 
-STATUS_PERMITIDOS = {1 : "Novo", 2 : "em  andamento",3 : "concluido", 4 : "cancelado"}
+STATUS_PERMITIDOS = {1 : "Novo", 2 : "em  andamento",3 : "concluído", 4 : "cancelado"}
 
 class Pedido:
     id = 0
 
-    def __init__(self,cliente,itens,total):
+    def __init__(self,cliente,itens):   #removido o total, visto que não é lógico eu ter que fornecer o valor total e posteriormente ter uma função para calcular
         Pedido.id += 1
         self.id = str(Pedido.id)
         self.cliente = cliente
         self.itens = itens
-        self.total = total
+        self.total = 0
         self.status = STATUS_PERMITIDOS[1] #Como é um novo pedido
+        self.calculo_total() #a princípio, quando o objeto for criado, já irá ser feito o cálculo automaticamente do valor total
 
 
 

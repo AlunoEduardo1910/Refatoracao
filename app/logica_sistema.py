@@ -3,22 +3,29 @@ from models.cliente import Cliente
 from models.pedidos import Pedido
 import json
 
-CLIENTES = []
+CLIENTES = {}
 MENU = {"Pizza Salgada" : 50, "Pizza Doce" : 30, "Refri" : 7, "Água" : 5}
 PEDIDOS_ITENS = []
 PEDIDOS = {}
-OBSERVAÇÃO = {}
 
 
 def novo_cliente(nome, email, vip=False): #retirado a data como parâmetro, tendo em vista que ela é gerada automaticamente dentro da classe
     cliente = Cliente(nome, email, vip)
-    return f"Nome do Cliente: {cliente.nome}\n" \
-           f"Email do Cliente: {cliente.email}\n" \
-           f"VIP: {cliente.vip}"
+    CLIENTES[email] = cliente
+    return cliente
 
+def buscar_cliente(email): #criado uma nova função de buscar clientes com base no email
+    return CLIENTES.get(email)
 
-def criar_pedido(email, itens):
-    pedido = Pedido(email, itens)
+def criar_pedido(email, nomes_itens):
+    cliente = buscar_cliente(email)
+    if not cliente:
+        return None
+    itens = []
+    for nome in nomes_itens:
+        if nome in MENU:
+            itens.append({"nome": nome, "preco": MENU[nome], "qtd": 1})
+    pedido = Pedido(cliente, itens)
     PEDIDOS.append(pedido)
     return pedido
 #alterado p para pedido, para melhor identificação
